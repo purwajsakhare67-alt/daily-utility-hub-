@@ -17,6 +17,7 @@
     <div class="mb-8 w-full max-w-4xl flex justify-center space-x-4 bg-gray-800 p-2 rounded-xl mt-8">
         <button id="tab-studio" class="px-6 py-2 rounded-lg font-medium bg-blue-600 text-white transition duration-200">Focus Studio</button>
         <button id="tab-cleaner" class="px-6 py-2 rounded-lg font-medium text-gray-400 hover:text-white hover:bg-gray-700 transition duration-200">Text Cleaner</button>
+        <button id="tab-color" class="px-6 py-2 rounded-lg font-medium text-gray-400 hover:text-white hover:bg-gray-700 transition duration-200">Color Tool</button>
     </div>
 
     <!-- View Container -->
@@ -113,6 +114,24 @@
                 <button id="btn-titlecase" class="bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg transition duration-200">Title Case</button>
                 <button id="btn-strip-breaks" class="bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg transition duration-200">Strip Line Breaks</button>
                 <button id="btn-to-markdown" class="bg-gray-700 hover:bg-gray-600 text-gray-200 px-4 py-2 rounded-lg transition duration-200">To Markdown</button>
+            </div>
+        </div>
+
+        <!-- Color Tool View -->
+        <div id="color-view" class="hidden bg-gray-800 p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-semibold mb-2 text-gray-300">Color Palette & Moodboard Extractor</h2>
+            <div class="flex items-center space-x-4 mb-6">
+                <input type="color" id="base-color-picker" value="#3b82f6" class="w-12 h-12 rounded cursor-pointer border-0 bg-transparent">
+                <button id="btn-generate-palette" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">Generate Random Palette</button>
+                <div id="mood-tag" class="text-sm px-3 py-1 rounded-full bg-gray-700 text-gray-300">Mood: Neutral</div>
+            </div>
+
+            <div class="relative mb-4">
+                <span id="color-copy-tooltip" class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white text-xs px-2 py-1 rounded hidden transition-opacity duration-300 z-10">Copied!</span>
+            </div>
+
+            <div id="palette-container" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <!-- Color swatches will be generated here -->
             </div>
         </div>
 
@@ -231,32 +250,34 @@
         // Tab Navigation Logic
         const tabStudio = document.getElementById('tab-studio');
         const tabCleaner = document.getElementById('tab-cleaner');
+        const tabColor = document.getElementById('tab-color');
+
         const viewStudio = document.getElementById('studio-view');
         const viewCleaner = document.getElementById('cleaner-view');
+        const viewColor = document.getElementById('color-view');
 
-        tabStudio.addEventListener('click', () => {
-            viewStudio.classList.remove('hidden');
-            viewCleaner.classList.add('hidden');
-            tabStudio.classList.replace('text-gray-400', 'text-white');
-            tabStudio.classList.replace('hover:text-white', 'bg-blue-600');
-            tabStudio.classList.remove('hover:bg-gray-700');
-            tabStudio.classList.add('bg-blue-600');
-
-            tabCleaner.classList.remove('bg-blue-600', 'text-white');
-            tabCleaner.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
-        });
-
-        tabCleaner.addEventListener('click', () => {
-            viewCleaner.classList.remove('hidden');
+        function switchTab(activeTab, activeView) {
+            // Hide all views
             viewStudio.classList.add('hidden');
-            tabCleaner.classList.replace('text-gray-400', 'text-white');
-            tabCleaner.classList.replace('hover:text-white', 'bg-blue-600');
-            tabCleaner.classList.remove('hover:bg-gray-700');
-            tabCleaner.classList.add('bg-blue-600');
+            viewCleaner.classList.add('hidden');
+            viewColor.classList.add('hidden');
 
-            tabStudio.classList.remove('bg-blue-600', 'text-white');
-            tabStudio.classList.add('text-gray-400', 'hover:text-white', 'hover:bg-gray-700');
-        });
+            // Show active view
+            activeView.classList.remove('hidden');
+
+            // Reset all tabs
+            const allTabs = [tabStudio, tabCleaner, tabColor];
+            allTabs.forEach(tab => {
+                tab.className = "px-6 py-2 rounded-lg font-medium text-gray-400 hover:text-white hover:bg-gray-700 transition duration-200";
+            });
+
+            // Set active tab classes
+            activeTab.className = "px-6 py-2 rounded-lg font-medium bg-blue-600 text-white transition duration-200";
+        }
+
+        tabStudio.addEventListener('click', () => switchTab(tabStudio, viewStudio));
+        tabCleaner.addEventListener('click', () => switchTab(tabCleaner, viewCleaner));
+        tabColor.addEventListener('click', () => switchTab(tabColor, viewColor));
 
         // Text Cleaner Logic
         const textInput = document.getElementById('text-input');
@@ -302,6 +323,125 @@
                 console.error('Failed to copy text: ', err);
             }
         });
+
+        // Color Tool Logic
+        const btnGeneratePalette = document.getElementById('btn-generate-palette');
+        const baseColorPicker = document.getElementById('base-color-picker');
+        const paletteContainer = document.getElementById('palette-container');
+        const moodTag = document.getElementById('mood-tag');
+        const colorCopyTooltip = document.getElementById('color-copy-tooltip');
+
+        function hexToRgb(hex) {
+            let r = 0, g = 0, b = 0;
+            if (hex.length === 4) {
+                r = parseInt(hex[1] + hex[1], 16);
+                g = parseInt(hex[2] + hex[2], 16);
+                b = parseInt(hex[3] + hex[3], 16);
+            } else if (hex.length === 7) {
+                r = parseInt(hex[1] + hex[2], 16);
+                g = parseInt(hex[3] + hex[4], 16);
+                b = parseInt(hex[5] + hex[6], 16);
+            }
+            return { r, g, b };
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            let max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                let d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function determineMood(hsl) {
+            if (hsl.s < 20) return "Professional";
+            if (hsl.l > 80) return "Calm";
+            if (hsl.h >= 0 && hsl.h < 45) return "Energetic";
+            if (hsl.h >= 45 && hsl.h < 150) return "Fresh";
+            if (hsl.h >= 150 && hsl.h < 260) return "Trustworthy";
+            if (hsl.h >= 260 && hsl.h < 330) return "Creative";
+            return "Vibrant";
+        }
+
+        function generateRandomHex() {
+            return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+        }
+
+        function generatePalette() {
+            paletteContainer.innerHTML = '';
+            let baseHex = baseColorPicker.value;
+            let colors = [baseHex];
+
+            for (let i = 0; i < 4; i++) {
+                colors.push(generateRandomHex());
+            }
+
+            // Determine mood based on base color
+            const baseRgb = hexToRgb(baseHex);
+            const baseHsl = rgbToHsl(baseRgb.r, baseRgb.g, baseRgb.b);
+            moodTag.textContent = "Mood: " + determineMood(baseHsl);
+
+            colors.forEach(hex => {
+                const rgb = hexToRgb(hex);
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+                const swatch = document.createElement('div');
+                swatch.className = "flex flex-col items-center bg-gray-700 rounded-lg p-4 transition duration-200 hover:shadow-lg";
+
+                swatch.innerHTML = `
+                    <div class="w-full h-24 rounded-lg mb-4 shadow-inner" style="background-color: ${hex}"></div>
+                    <div class="w-full text-center space-y-2">
+                        <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 rounded transition duration-200 copy-color-btn" data-color="${hex}">HEX: ${hex.toUpperCase()}</button>
+                        <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 rounded transition duration-200 copy-color-btn" data-color="rgb(${rgb.r}, ${rgb.g}, ${rgb.b})">RGB: ${rgb.r}, ${rgb.g}, ${rgb.b}</button>
+                        <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 rounded transition duration-200 copy-color-btn" data-color="hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)">HSL: ${hsl.h}, ${hsl.s}%, ${hsl.l}%</button>
+                    </div>
+                `;
+                paletteContainer.appendChild(swatch);
+            });
+
+            // Add copy functionality to new buttons
+            document.querySelectorAll('.copy-color-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const color = e.target.getAttribute('data-color');
+                    try {
+                        await navigator.clipboard.writeText(color);
+                        colorCopyTooltip.classList.remove('hidden');
+                        setTimeout(() => {
+                            colorCopyTooltip.classList.add('hidden');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                    }
+                });
+            });
+        }
+
+        btnGeneratePalette.addEventListener('click', () => {
+            // Pick a random base color for full randomness on button click
+            baseColorPicker.value = generateRandomHex();
+            generatePalette();
+        });
+
+        baseColorPicker.addEventListener('change', generatePalette);
+
+        // Initial generation
+        generatePalette();
 
     </script>
 </body>
