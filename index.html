@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus & Ambient Sound Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Pomodoro Timer Section -->
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-xl flex flex-col items-center justify-center">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-300">Pomodoro</h2>
+            <div id="timer-display" class="text-6xl font-bold mb-8 tracking-widest">
+                25:00
+            </div>
+            <div id="timer-status" class="text-xl mb-6 text-gray-400">
+                Work Time
+            </div>
+            <div class="flex space-x-4">
+                <button id="start-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">Start</button>
+                <button id="pause-btn" class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">Pause</button>
+                <button id="reset-btn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition duration-200">Reset</button>
+            </div>
+        </div>
+
+        <!-- Ambient Sound Controls Section -->
+        <div class="bg-gray-800 p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-semibold mb-6 text-gray-300">Ambient Sounds</h2>
+
+            <div class="space-y-6">
+                <!-- Rain -->
+                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <button id="btn-rain" class="bg-blue-600 hover:bg-blue-700 w-12 h-12 rounded-full flex items-center justify-center mr-4 transition duration-200">
+                            ▶
+                        </button>
+                        <span class="text-lg">Rain</span>
+                    </div>
+                    <input type="range" id="vol-rain" min="0" max="1" step="0.01" value="0.5" class="w-32 accent-blue-500">
+                </div>
+
+                <!-- Coffee Shop -->
+                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <button id="btn-coffee" class="bg-yellow-800 hover:bg-yellow-900 w-12 h-12 rounded-full flex items-center justify-center mr-4 transition duration-200">
+                            ▶
+                        </button>
+                        <span class="text-lg">Coffee Shop</span>
+                    </div>
+                    <input type="range" id="vol-coffee" min="0" max="1" step="0.01" value="0.5" class="w-32 accent-yellow-700">
+                </div>
+
+                <!-- White Noise -->
+                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <button id="btn-whitenoise" class="bg-gray-500 hover:bg-gray-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 transition duration-200">
+                            ▶
+                        </button>
+                        <span class="text-lg">White Noise</span>
+                    </div>
+                    <input type="range" id="vol-whitenoise" min="0" max="1" step="0.01" value="0.5" class="w-32 accent-gray-400">
+                </div>
+
+                <!-- Forest Birds -->
+                <div class="flex items-center justify-between bg-gray-700 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <button id="btn-birds" class="bg-green-600 hover:bg-green-700 w-12 h-12 rounded-full flex items-center justify-center mr-4 transition duration-200">
+                            ▶
+                        </button>
+                        <span class="text-lg">Forest Birds</span>
+                    </div>
+                    <input type="range" id="vol-birds" min="0" max="1" step="0.01" value="0.5" class="w-32 accent-green-500">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Pomodoro Timer Logic
+        const WORK_TIME = 25 * 60; // 25 minutes
+        const BREAK_TIME = 5 * 60;  // 5 minutes
+
+        let timeLeft = WORK_TIME;
+        let isWorkTime = true;
+        let timerInterval = null;
+
+        const displayElement = document.getElementById('timer-display');
+        const statusElement = document.getElementById('timer-status');
+        const startBtn = document.getElementById('start-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            displayElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerInterval) return; // already running
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                if (timeLeft < 0) {
+                    // Switch modes
+                    isWorkTime = !isWorkTime;
+                    timeLeft = isWorkTime ? WORK_TIME : BREAK_TIME;
+                    statusElement.textContent = isWorkTime ? 'Work Time' : 'Break Time';
+                    statusElement.className = isWorkTime ? 'text-xl mb-6 text-gray-400' : 'text-xl mb-6 text-green-400';
+                }
+                updateDisplay();
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            isWorkTime = true;
+            timeLeft = WORK_TIME;
+            statusElement.textContent = 'Work Time';
+            statusElement.className = 'text-xl mb-6 text-gray-400';
+            updateDisplay();
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Initialize display
+        updateDisplay();
+
+        // Ambient Sound Logic
+        const sounds = [
+            {
+                id: 'rain',
+                url: 'https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg',
+                btn: document.getElementById('btn-rain'),
+                vol: document.getElementById('vol-rain')
+            },
+            {
+                id: 'coffee',
+                url: 'https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg',
+                btn: document.getElementById('btn-coffee'),
+                vol: document.getElementById('vol-coffee')
+            },
+            {
+                id: 'whitenoise',
+                url: 'https://actions.google.com/sounds/v1/water/waves_crashing_on_rock_beach.ogg',
+                btn: document.getElementById('btn-whitenoise'),
+                vol: document.getElementById('vol-whitenoise')
+            },
+            {
+                id: 'birds',
+                url: 'https://actions.google.com/sounds/v1/weather/thunderstorm.ogg',
+                btn: document.getElementById('btn-birds'),
+                vol: document.getElementById('vol-birds')
+            }
+        ];
+
+        sounds.forEach(sound => {
+            const audio = new Audio(sound.url);
+            audio.loop = true;
+            audio.volume = sound.vol.value;
+
+            let isPlaying = false;
+
+            sound.btn.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    sound.btn.textContent = '▶';
+                } else {
+                    audio.play().catch(e => console.error("Error playing audio", e));
+                    sound.btn.textContent = '⏸';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            sound.vol.addEventListener('input', (e) => {
+                audio.volume = e.target.value;
+            });
+        });
+    </script>
+</body>
+</html>
