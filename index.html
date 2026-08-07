@@ -35,9 +35,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-4 font-sans">
+<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black text-white min-h-screen flex flex-col items-center p-4 font-sans antialiased">
 
-    <header class="w-full max-w-6xl mb-6">
+    <header class="w-full max-w-7xl mb-6 backdrop-blur-md bg-gray-900/80 sticky top-0 z-40 p-4 rounded-b-2xl shadow-lg border-b border-gray-700/50">
         <h1 class="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">All-in-One Pro Utility Hub</h1>
 
         <!-- Horizontal Scrollable Tab Navigation -->
@@ -49,10 +49,17 @@
     </header>
 
     <div id="toast" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity"></div>
-    <main class="w-full max-w-6xl flex-grow relative" id="views-container">
+
+    <!-- Top AdSense Banner -->
+    <div class="w-full max-w-7xl mx-auto my-6 bg-gray-800/50 border border-gray-700/50 rounded-xl p-4 flex items-center justify-center min-h-[90px] text-gray-500 text-sm backdrop-blur-sm">
+        [AdSense Leaderboard / Responsive Ad Slot]
+    </div>
+
+    <main class="w-full max-w-7xl flex-grow relative" id="views-container">
+
 
         <!-- 1. Focus Studio -->
-        <div id="view-focus" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-focus" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Focus Studio</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-gray-700 p-6 rounded-xl flex flex-col items-center justify-center">
@@ -60,9 +67,9 @@
                     <div id="timer-display" class="text-6xl font-bold mb-4 tracking-widest">25:00</div>
                     <div id="timer-status" class="text-lg mb-6 text-gray-400">Work Time</div>
                     <div class="flex space-x-3">
-                        <button id="start-btn" class="bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Start</button>
-                        <button id="pause-btn" class="bg-yellow-600 hover:bg-yellow-500 px-4 py-2 rounded-lg font-medium">Pause</button>
-                        <button id="reset-btn" class="bg-red-600 hover:bg-red-500 px-4 py-2 rounded-lg font-medium">Reset</button>
+                        <button id="start-btn" class="bg-green-600 hover:bg-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Start</button>
+                        <button id="pause-btn" class="bg-yellow-600 hover:bg-yellow-500 hover:shadow-[0_0_15px_rgba(234,179,8,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Pause</button>
+                        <button id="reset-btn" class="bg-red-600 hover:bg-red-500 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Reset</button>
                     </div>
                 </div>
                 <div class="bg-gray-700 p-6 rounded-xl">
@@ -72,13 +79,38 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 2. Text Cleaner -->
-        <div id="view-text" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-text" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-semibold">Text Cleaner Vault</h2>
-                <button id="btn-copy-text" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm font-medium">Copy Text</button>
+                <button id="btn-copy-text" class="bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-4 py-2 rounded-lg text-sm font-medium">Copy Text</button>
             </div>
             <textarea id="text-input" class="w-full h-48 bg-gray-900 border border-gray-600 rounded-lg p-4 mb-4 focus:outline-none focus:border-blue-500" placeholder="Type or paste text here..."></textarea>
             <div class="flex justify-between text-sm text-gray-400 mb-6 px-1">
@@ -86,33 +118,83 @@
                 <span>Words: <span id="word-count" class="text-white">0</span></span>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <button id="btn-uppercase" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">UPPERCASE</button>
-                <button id="btn-lowercase" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">lowercase</button>
-                <button id="btn-titlecase" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Title Case</button>
-                <button id="btn-rm-spaces" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Remove Extra Spaces</button>
-                <button id="btn-strip-breaks" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Strip Line Breaks</button>
-                <button id="btn-to-markdown" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Links to Markdown</button>
+                <button id="btn-uppercase" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">UPPERCASE</button>
+                <button id="btn-lowercase" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">lowercase</button>
+                <button id="btn-titlecase" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">Title Case</button>
+                <button id="btn-rm-spaces" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">Remove Extra Spaces</button>
+                <button id="btn-strip-breaks" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">Strip Line Breaks</button>
+                <button id="btn-to-markdown" class="bg-gray-700 hover:bg-gray-600 hover:shadow-[0_0_15px_rgba(156,163,175,0.3)] transition-all duration-300 px-4 py-2 rounded-lg">Links to Markdown</button>
+            </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 3. Color Palette -->
-        <div id="view-color" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-color" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Color Palette & Moodboard</h2>
             <div class="flex flex-wrap items-center gap-4 mb-6">
                 <div class="flex items-center space-x-2">
                     <label for="base-color-picker" class="text-gray-300">Base Color:</label>
                     <input type="color" id="base-color-picker" value="#3b82f6" class="w-10 h-10 rounded cursor-pointer bg-transparent border-none">
                 </div>
-                <button id="btn-generate-palette" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-medium">Generate Random Palette</button>
+                <button id="btn-generate-palette" class="bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-6 py-2 rounded-lg font-medium">Generate Random Palette</button>
                 <div id="mood-tag" class="px-4 py-2 rounded-full bg-gray-700 text-sm">Mood: Neutral</div>
             </div>
             <div id="palette-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
                 <!-- Color swatches -->
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 4. Screenshot Mockup -->
-        <div id="view-mockup" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-mockup" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Screenshot Mockup Generator</h2>
             <div class="flex flex-col md:flex-row gap-6">
                 <div class="w-full md:w-1/3 space-y-4">
@@ -129,17 +211,42 @@
                             <option value="dark-gray">Dark Gray</option>
                         </select>
                     </div>
-                    <button id="btn-dl-mockup" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Download Mockup</button>
+                    <button id="btn-dl-mockup" class="w-full bg-green-600 hover:bg-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Download Mockup</button>
                 </div>
                 <div class="w-full md:w-2/3 bg-gray-900 rounded-xl flex items-center justify-center overflow-hidden border border-gray-700 min-h-[300px] p-4">
                     <canvas id="mockup-canvas" class="max-w-full h-auto shadow-2xl rounded-xl hidden"></canvas>
                     <p id="mockup-placeholder" class="text-gray-500">Upload an image to preview</p>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 5. Background Remover -->
-        <div id="view-bgrem" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-bgrem" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Background Remover (Simulation)</h2>
             <p class="text-sm text-gray-400 mb-6">Client-side processing: click on the image to select the background color to remove.</p>
             <div class="flex flex-col md:flex-row gap-6">
@@ -149,17 +256,42 @@
                         <label class="block text-gray-300 mb-2">Tolerance: <span id="bgrem-tol-val">30</span></label>
                         <input type="range" id="bgrem-tolerance" min="0" max="150" value="30" class="w-full">
                     </div>
-                    <button id="btn-dl-bgrem" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Download Transparent Image</button>
+                    <button id="btn-dl-bgrem" class="w-full bg-green-600 hover:bg-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Download Transparent Image</button>
                 </div>
                 <div class="w-full md:w-2/3 bg-gray-900 rounded-xl flex items-center justify-center overflow-auto border border-gray-700 min-h-[300px] relative" style="background-image: repeating-linear-gradient(45deg, #374151 25%, transparent 25%, transparent 75%, #374151 75%, #374151), repeating-linear-gradient(45deg, #374151 25%, #1f2937 25%, #1f2937 75%, #374151 75%, #374151); background-position: 0 0, 10px 10px; background-size: 20px 20px;">
                     <canvas id="bgrem-canvas" class="max-w-full cursor-crosshair hidden"></canvas>
                     <p id="bgrem-placeholder" class="text-gray-500 bg-gray-900 px-4 py-2 rounded relative z-10">Upload an image to start</p>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 6. Reading & Speaking Time -->
-        <div id="view-readtime" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-readtime" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Reading & Speaking Time Calculator</h2>
             <textarea id="readtime-input" class="w-full h-48 bg-gray-900 border border-gray-600 rounded-lg p-4 mb-6 focus:outline-none focus:border-blue-500" placeholder="Paste your article, speech, or script here..."></textarea>
 
@@ -177,10 +309,35 @@
                     <p class="text-3xl font-bold text-purple-400" id="readtime-speaking">0m 0s</p>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 7. Aspect Ratio & Scaler -->
-        <div id="view-aspect" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-aspect" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Aspect Ratio & Scaler</h2>
             <div class="flex flex-col md:flex-row gap-6">
                 <div class="w-full md:w-1/3 space-y-4">
@@ -194,17 +351,42 @@
                             <option value="4:5">4:5 (Portrait - Instagram Post)</option>
                         </select>
                     </div>
-                    <button id="btn-dl-aspect" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Download Cropped Image</button>
+                    <button id="btn-dl-aspect" class="w-full bg-green-600 hover:bg-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Download Cropped Image</button>
                 </div>
                 <div class="w-full md:w-2/3 bg-gray-900 rounded-xl flex items-center justify-center overflow-hidden border border-gray-700 min-h-[300px] p-4">
                     <canvas id="aspect-canvas" class="max-w-full max-h-[500px] object-contain hidden"></canvas>
                     <p id="aspect-placeholder" class="text-gray-500">Upload an image to crop</p>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 8. SVG to CSS/URI -->
-        <div id="view-svg" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-svg" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">SVG to CSS / Data URI</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -214,7 +396,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-2">
                         <label class="block text-gray-300">CSS Background / Data URI</label>
-                        <button id="btn-copy-svg" class="text-xs bg-blue-600 hover:bg-blue-500 px-2 py-1 rounded">Copy CSS</button>
+                        <button id="btn-copy-svg" class="text-xs bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-2 py-1 rounded">Copy CSS</button>
                     </div>
                     <textarea id="svg-output" readonly class="w-full h-48 bg-gray-900 border border-gray-600 rounded-lg p-4 focus:outline-none text-green-400 font-mono text-sm"></textarea>
                 </div>
@@ -223,10 +405,35 @@
                 <p class="text-sm text-gray-400 mb-2">Live Preview:</p>
                 <div id="svg-preview" class="w-16 h-16 mx-auto bg-no-repeat bg-center bg-contain"></div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 9. AI Design Utils -->
-        <div id="view-design" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-design" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">AI Design Utils</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -234,8 +441,8 @@
                 <div class="bg-gray-700 p-6 rounded-xl text-center">
                     <h3 class="text-lg font-medium mb-4">Gradient Generator</h3>
                     <div id="design-gradient-preview" class="w-full h-24 rounded-lg mb-4 shadow-inner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"></div>
-                    <button id="btn-design-gradient" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm w-full mb-2">Generate Random</button>
-                    <button id="btn-copy-gradient" class="bg-gray-800 hover:bg-gray-900 text-gray-300 px-4 py-2 rounded-lg text-xs w-full">Copy CSS</button>
+                    <button id="btn-design-gradient" class="bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-4 py-2 rounded-lg text-sm w-full mb-2">Generate Random</button>
+                    <button id="btn-copy-gradient" class="bg-gray-800 hover:bg-gray-900 hover:shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 text-gray-300 px-4 py-2 rounded-lg text-xs w-full">Copy CSS</button>
                 </div>
 
                 <!-- Font Pairing -->
@@ -245,7 +452,7 @@
                         <h4 id="design-font-h" class="text-xl mb-1" style="font-family: serif;">Heading Font</h4>
                         <p id="design-font-p" class="text-xs text-gray-400" style="font-family: sans-serif;">This is a paragraph font pairing preview to see how they look together.</p>
                     </div>
-                    <button id="btn-design-font" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm w-full mb-2">Randomize Pairing</button>
+                    <button id="btn-design-font" class="bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-4 py-2 rounded-lg text-sm w-full mb-2">Randomize Pairing</button>
                     <div id="design-font-names" class="text-xs text-center text-gray-400">Serif / Sans-Serif</div>
                 </div>
 
@@ -257,29 +464,85 @@
                         <span class="text-gray-400 pt-2">x</span>
                         <input type="number" id="ph-h" value="400" class="w-1/2 bg-gray-900 border border-gray-600 rounded p-2 text-center" placeholder="H">
                     </div>
-                    <button id="btn-copy-ph" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm w-full">Copy URL</button>
+                    <button id="btn-copy-ph" class="bg-blue-600 hover:bg-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 px-4 py-2 rounded-lg text-sm w-full">Copy URL</button>
                 </div>
 
+            </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 10. QR & Barcode Gen -->
-        <div id="view-qr" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-qr" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">QR Code Generator</h2>
             <div class="flex flex-col md:flex-row gap-8 items-start">
                 <div class="w-full md:w-1/2">
                     <label class="block text-gray-300 mb-2">Enter URL or Text</label>
                     <textarea id="qr-input" class="w-full h-32 bg-gray-900 border border-gray-600 rounded-lg p-4 mb-4 focus:outline-none focus:border-blue-500" placeholder="https://example.com"></textarea>
-                    <button id="btn-dl-qr" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Download QR Code</button>
+                    <button id="btn-dl-qr" class="w-full bg-green-600 hover:bg-green-500 hover:shadow-[0_0_15px_rgba(34,197,94,0.5)] transition-all duration-300 px-4 py-2 rounded-lg font-medium">Download QR Code</button>
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col items-center justify-center bg-white p-8 rounded-xl min-h-[250px]">
                     <div id="qrcode-container"></div>
                     <p id="qr-placeholder" class="text-gray-500 mt-4 text-sm text-center">QR Code will appear here</p>
                 </div>
             </div>
+
+            <!-- Before & After Visual Showcase -->
+            <div class="mt-10 border-t border-gray-700 pt-8">
+                <h3 class="text-xl font-medium text-gray-300 mb-6 text-center">Before <span class="text-gray-500 mx-2">vs</span> After</h3>
+                <div class="flex flex-col md:flex-row gap-6 relative">
+                    <!-- Before Card -->
+                    <div class="w-full md:w-1/2 bg-gray-900/50 rounded-xl p-6 border border-gray-700/50 opacity-70 grayscale-[50%] transition duration-300 hover:grayscale-0 hover:opacity-100">
+                        <div class="absolute -top-3 left-6 bg-gray-700 text-xs px-3 py-1 rounded-full text-gray-300 shadow">Before</div>
+                        <div class="h-24 w-full bg-gray-800 rounded flex items-center justify-center border border-dashed border-gray-600 text-gray-500 text-sm overflow-hidden p-2">
+                            [Raw / Messy Input]
+                        </div>
+                    </div>
+                    <!-- VS Badge (Desktop) -->
+                    <div class="hidden md:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 w-10 h-10 rounded-full items-center justify-center font-bold shadow-[0_0_15px_rgba(37,99,235,0.6)] z-10 text-sm">
+                        VS
+                    </div>
+                    <!-- After Card -->
+                    <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-6 border border-blue-500/30 shadow-[0_0_25px_rgba(59,130,246,0.15)] transition duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-xs px-3 py-1 rounded-full font-medium shadow-lg">After (Polished)</div>
+                        <div class="h-24 w-full bg-gray-900 rounded flex items-center justify-center border border-gray-700 text-blue-400 font-medium text-sm overflow-hidden p-2">
+                            [Clean / Premium Output]
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
+
+
+    <!-- Bottom AdSense Banner -->
+    <div class="w-full max-w-7xl mx-auto my-6 bg-gray-800/50 border border-gray-700/50 rounded-xl p-4 flex items-center justify-center min-h-[90px] text-gray-500 text-sm backdrop-blur-sm">
+        [AdSense Leaderboard / Native Banner Slot]
+    </div>
 
     <footer class="w-full text-center text-gray-500 text-sm py-6 mt-4">
         &copy; 2026 Pro Utility Hub. All tools run client-side.
@@ -408,7 +671,7 @@
             row.className = "flex items-center justify-between bg-gray-600 p-3 rounded-lg";
             row.innerHTML = `
                 <div class="flex items-center">
-                    <button id="btn-snd-${s.id}" class="bg-gray-800 hover:bg-gray-900 w-10 h-10 rounded-full flex items-center justify-center mr-3 transition duration-200">▶</button>
+                    <button id="btn-snd-${s.id}" class="bg-gray-800 hover:bg-gray-900 hover:shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 w-10 h-10 rounded-full flex items-center justify-center mr-3 transition duration-200">▶</button>
                     <span class="text-sm font-medium">${s.name}</span>
                 </div>
                 <input type="range" id="vol-snd-${s.id}" min="0" max="1" step="0.01" value="0.5" class="w-24">
@@ -523,9 +786,9 @@
                 el.className = "flex flex-col items-center bg-gray-700 rounded-lg p-4";
                 el.innerHTML = `
                     <div class="w-full h-20 rounded-lg mb-3 shadow-inner" style="background-color:${hex}"></div>
-                    <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 mb-1 rounded copy-clr" data-c="${hex}">${hex.toUpperCase()}</button>
-                    <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 mb-1 rounded copy-clr" data-c="rgb(${rgb.r},${rgb.g},${rgb.b})">RGB</button>
-                    <button class="w-full bg-gray-600 hover:bg-gray-500 text-xs py-1 rounded copy-clr" data-c="hsl(${hsl.h},${hsl.s}%,${hsl.l}%)">HSL</button>
+                    <button class="w-full bg-gray-600 hover:bg-gray-500 hover:shadow-[0_0_15px_rgba(156,163,175,0.4)] transition-all duration-300 text-xs py-1 mb-1 rounded copy-clr" data-c="${hex}">${hex.toUpperCase()}</button>
+                    <button class="w-full bg-gray-600 hover:bg-gray-500 hover:shadow-[0_0_15px_rgba(156,163,175,0.4)] transition-all duration-300 text-xs py-1 mb-1 rounded copy-clr" data-c="rgb(${rgb.r},${rgb.g},${rgb.b})">RGB</button>
+                    <button class="w-full bg-gray-600 hover:bg-gray-500 hover:shadow-[0_0_15px_rgba(156,163,175,0.4)] transition-all duration-300 text-xs py-1 rounded copy-clr" data-c="hsl(${hsl.h},${hsl.s}%,${hsl.l}%)">HSL</button>
                 `;
                 paletteContainer.appendChild(el);
             });
