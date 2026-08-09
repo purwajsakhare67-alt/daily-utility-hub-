@@ -34,10 +34,11 @@
             background-color: #374151; /* gray-700 */
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-4 font-sans">
+<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black text-white min-h-screen flex flex-col items-center p-4 font-sans">
 
-    <header class="w-full max-w-6xl mb-6">
+    <header class="w-full max-w-7xl mb-6">
         <h1 class="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">All-in-One Pro Utility Hub</h1>
 
         <!-- Horizontal Scrollable Tab Navigation -->
@@ -48,11 +49,17 @@
         </div>
     </header>
 
+    <!-- Top Leaderboard Ad Slot -->
+    <div class="w-full max-w-7xl mx-auto mb-6 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm flex justify-center items-center h-24 sm:h-32 shadow-inner">
+        <span class="text-gray-500 text-sm font-medium tracking-widest uppercase">[AdSense Leaderboard / Responsive Ad Slot]</span>
+    </div>
+
+
     <div id="toast" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden z-50 transition-opacity"></div>
-    <main class="w-full max-w-6xl flex-grow relative" id="views-container">
+    <main class="w-full max-w-7xl flex-grow relative" id="views-container">
 
         <!-- 1. Focus Studio -->
-        <div id="view-focus" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-focus" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Focus Studio</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="bg-gray-700 p-6 rounded-xl flex flex-col items-center justify-center">
@@ -75,7 +82,7 @@
         </div>
 
         <!-- 2. Text Cleaner -->
-        <div id="view-text" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-text" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-semibold">Text Cleaner Vault</h2>
                 <button id="btn-copy-text" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm font-medium">Copy Text</button>
@@ -96,7 +103,7 @@
         </div>
 
         <!-- 3. Color Palette -->
-        <div id="view-color" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-color" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Color Palette & Moodboard</h2>
             <div class="flex flex-wrap items-center gap-4 mb-6">
                 <div class="flex items-center space-x-2">
@@ -112,7 +119,7 @@
         </div>
 
         <!-- 4. Screenshot Mockup -->
-        <div id="view-mockup" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-mockup" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Screenshot Mockup Generator</h2>
             <div class="flex flex-col md:flex-row gap-6">
                 <div class="w-full md:w-1/3 space-y-4">
@@ -138,28 +145,8 @@
             </div>
         </div>
 
-        <!-- 5. Background Remover -->
-        <div id="view-bgrem" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
-            <h2 class="text-2xl font-semibold mb-6">Background Remover (Simulation)</h2>
-            <p class="text-sm text-gray-400 mb-6">Client-side processing: click on the image to select the background color to remove.</p>
-            <div class="flex flex-col md:flex-row gap-6">
-                <div class="w-full md:w-1/3 space-y-4">
-                    <input type="file" id="bgrem-upload" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Tolerance: <span id="bgrem-tol-val">30</span></label>
-                        <input type="range" id="bgrem-tolerance" min="0" max="150" value="30" class="w-full">
-                    </div>
-                    <button id="btn-dl-bgrem" class="w-full bg-green-600 hover:bg-green-500 px-4 py-2 rounded-lg font-medium">Download Transparent Image</button>
-                </div>
-                <div class="w-full md:w-2/3 bg-gray-900 rounded-xl flex items-center justify-center overflow-auto border border-gray-700 min-h-[300px] relative" style="background-image: repeating-linear-gradient(45deg, #374151 25%, transparent 25%, transparent 75%, #374151 75%, #374151), repeating-linear-gradient(45deg, #374151 25%, #1f2937 25%, #1f2937 75%, #374151 75%, #374151); background-position: 0 0, 10px 10px; background-size: 20px 20px;">
-                    <canvas id="bgrem-canvas" class="max-w-full cursor-crosshair hidden"></canvas>
-                    <p id="bgrem-placeholder" class="text-gray-500 bg-gray-900 px-4 py-2 rounded relative z-10">Upload an image to start</p>
-                </div>
-            </div>
-        </div>
-
         <!-- 6. Reading & Speaking Time -->
-        <div id="view-readtime" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-readtime" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Reading & Speaking Time Calculator</h2>
             <textarea id="readtime-input" class="w-full h-48 bg-gray-900 border border-gray-600 rounded-lg p-4 mb-6 focus:outline-none focus:border-blue-500" placeholder="Paste your article, speech, or script here..."></textarea>
 
@@ -180,7 +167,7 @@
         </div>
 
         <!-- 7. Aspect Ratio & Scaler -->
-        <div id="view-aspect" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-aspect" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">Aspect Ratio & Scaler</h2>
             <div class="flex flex-col md:flex-row gap-6">
                 <div class="w-full md:w-1/3 space-y-4">
@@ -204,7 +191,7 @@
         </div>
 
         <!-- 8. SVG to CSS/URI -->
-        <div id="view-svg" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-svg" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">SVG to CSS / Data URI</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -226,7 +213,7 @@
         </div>
 
         <!-- 9. AI Design Utils -->
-        <div id="view-design" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+        <div id="view-design" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">AI Design Utils</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
@@ -263,8 +250,147 @@
             </div>
         </div>
 
-        <!-- 10. QR & Barcode Gen -->
-        <div id="view-qr" class="view-section bg-gray-800 p-6 md:p-8 rounded-2xl shadow-xl hidden">
+
+        <!-- 11. AI Image-to-Text OCR -->
+        <div id="view-ocr" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
+            <h2 class="text-2xl font-semibold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">AI Image-to-Text OCR Scanner</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50">
+                    <label class="block mb-2 text-sm text-gray-300 font-medium">Upload Image</label>
+                    <input type="file" id="ocr-upload" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 transition-all cursor-pointer">
+                    <div id="ocr-preview-container" class="mt-4 w-full h-48 bg-gray-900 rounded-lg flex items-center justify-center border border-dashed border-gray-600 overflow-hidden relative">
+                        <span id="ocr-placeholder" class="text-gray-500 text-sm">Image Preview</span>
+                        <img id="ocr-preview-img" class="hidden max-h-full max-w-full object-contain">
+                        <div id="ocr-loading" class="hidden absolute inset-0 bg-gray-900/80 flex items-center justify-center backdrop-blur-sm">
+                            <span class="text-blue-400 font-mono animate-pulse">Extracting Text...</span>
+                        </div>
+                    </div>
+                    <button id="btn-extract-ocr" class="mt-4 w-full bg-blue-600 hover:bg-blue-500 transition-all duration-300 py-2 rounded-lg font-medium">Extract Text</button>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50 flex flex-col">
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="block text-sm text-gray-300 font-medium">Extracted Text</label>
+                        <button id="btn-copy-ocr" class="text-xs bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded transition-colors">Copy</button>
+                    </div>
+                    <textarea id="ocr-output" class="w-full flex-grow bg-gray-900 border border-gray-600 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 font-mono" placeholder="Extracted text will appear here..." readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- AdSense Slot (Middle) -->
+        <div class="w-full max-w-7xl mx-auto my-6 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm flex justify-center items-center h-24 shadow-inner">
+            <span class="text-gray-500 text-sm font-medium tracking-widest uppercase">[AdSense Leaderboard / In-Feed Slot]</span>
+        </div>
+
+        <!-- 12. Image Compressor -->
+        <div id="view-compress" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
+            <h2 class="text-2xl font-semibold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-400">Image Compressor & Resizer</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50">
+                    <label class="block mb-2 text-sm text-gray-300 font-medium">Upload Image</label>
+                    <input type="file" id="compress-upload" accept="image/jpeg, image/png, image/webp" class="w-full mb-4 text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-500 transition-all cursor-pointer">
+
+                    <div class="space-y-4 mb-4">
+                        <div>
+                            <label class="flex justify-between text-sm text-gray-300 mb-1">
+                                <span>Quality: <span id="compress-quality-val">80%</span></span>
+                            </label>
+                            <input type="range" id="compress-quality" min="0.1" max="1" step="0.1" value="0.8" class="w-full accent-emerald-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-gray-300 mb-1">Max Width (px)</label>
+                                <input type="number" id="compress-width" placeholder="Auto" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-300 mb-1">Format</label>
+                                <select id="compress-format" class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-1 text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="image/jpeg">JPEG</option>
+                                    <option value="image/webp">WebP</option>
+                                    <option value="image/png">PNG</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn-compress" class="w-full bg-emerald-600 hover:bg-emerald-500 transition-all duration-300 py-2 rounded-lg font-medium">Compress Image</button>
+                </div>
+
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50 flex flex-col items-center justify-center relative overflow-hidden group">
+                    <div id="compress-result" class="w-full flex flex-col items-center hidden">
+                        <img id="compress-preview" class="max-h-32 mb-4 object-contain rounded shadow-lg border border-gray-600">
+                        <div class="text-center w-full bg-gray-900 p-3 rounded-lg border border-gray-600">
+                            <div class="flex justify-between text-sm mb-1 text-gray-400">
+                                <span>Original:</span> <span id="compress-size-old" class="font-mono text-red-400">0 KB</span>
+                            </div>
+                            <div class="flex justify-between text-sm mb-3">
+                                <span>Compressed:</span> <span id="compress-size-new" class="font-mono text-emerald-400 font-bold">0 KB</span>
+                            </div>
+                            <button id="btn-dl-compress" class="w-full bg-gray-700 hover:bg-gray-600 py-1.5 rounded text-sm font-medium border border-gray-500">Download Result</button>
+                        </div>
+                    </div>
+                    <div id="compress-placeholder" class="text-gray-500 text-sm">Compressed preview will appear here</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 13. Secure Password Generator -->
+        <div id="view-password" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
+            <h2 class="text-2xl font-semibold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Secure Password & Hash Generator</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Password Gen -->
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50">
+                    <h3 class="text-lg text-gray-300 mb-4">Password Generator</h3>
+                    <div class="flex mb-4">
+                        <input type="text" id="pass-output" class="w-full bg-gray-900 border border-gray-600 rounded-l-lg p-3 font-mono text-lg tracking-wider focus:outline-none" readonly>
+                        <button id="btn-copy-pass" class="bg-purple-600 hover:bg-purple-500 px-4 rounded-r-lg font-medium">Copy</button>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div>
+                            <label class="flex justify-between text-sm text-gray-300 mb-1">
+                                <span>Length: <span id="pass-length-val">16</span></span>
+                            </label>
+                            <input type="range" id="pass-length" min="8" max="64" value="16" class="w-full accent-purple-500">
+                        </div>
+                        <div class="flex space-x-4 text-sm text-gray-300">
+                            <label class="flex items-center cursor-pointer"><input type="checkbox" id="pass-upper" checked class="mr-2 accent-purple-500"> Uppercase</label>
+                            <label class="flex items-center cursor-pointer"><input type="checkbox" id="pass-num" checked class="mr-2 accent-purple-500"> Numbers</label>
+                            <label class="flex items-center cursor-pointer"><input type="checkbox" id="pass-sym" checked class="mr-2 accent-purple-500"> Symbols</label>
+                        </div>
+                    </div>
+                    <button id="btn-gen-pass" class="w-full bg-gray-800 hover:bg-gray-900 border border-purple-500/50 py-2 rounded-lg font-medium text-purple-400">Generate New Password</button>
+                </div>
+
+                <!-- Hash Gen -->
+                <div class="bg-gray-700 p-6 rounded-xl border border-gray-600/50">
+                    <h3 class="text-lg text-gray-300 mb-4">String Hasher (SHA-256)</h3>
+                    <textarea id="hash-input" class="w-full h-20 bg-gray-900 border border-gray-600 rounded-lg p-3 text-sm focus:outline-none focus:border-pink-500 mb-4" placeholder="Enter text to hash..."></textarea>
+                    <div class="relative">
+                        <textarea id="hash-output" class="w-full h-24 bg-gray-900/50 border border-gray-600 rounded-lg p-3 text-xs font-mono text-pink-400 break-all focus:outline-none" placeholder="Hash output..." readonly></textarea>
+                        <button id="btn-copy-hash" class="absolute top-2 right-2 text-xs bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded border border-gray-600">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14. JSON Formatter -->
+        <div id="view-json" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">Advanced JSON Formatter</h2>
+                <div class="space-x-2">
+                    <button id="btn-json-format" class="bg-orange-600 hover:bg-orange-500 px-3 py-1.5 rounded text-sm font-medium">Format</button>
+                    <button id="btn-json-minify" class="bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded text-sm font-medium">Minify</button>
+                    <button id="btn-json-copy" class="bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded text-sm font-medium">Copy</button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="relative w-full h-[400px]">
+                    <textarea id="json-input" class="w-full h-full bg-gray-900 border border-gray-600 rounded-xl p-4 font-mono text-sm focus:outline-none focus:border-orange-500 resize-none shadow-inner" placeholder='Paste your JSON here...'></textarea>
+                    <div id="json-error" class="hidden absolute bottom-4 left-4 right-4 bg-red-900/90 border border-red-500 text-red-200 p-3 rounded-lg text-sm backdrop-blur-sm"></div>
+                </div>
+            </div>
+        </div>
+<!-- 10. QR & Barcode Gen -->
+        <div id="view-qr" class="view-section bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl hidden">
             <h2 class="text-2xl font-semibold mb-6">QR Code Generator</h2>
             <div class="flex flex-col md:flex-row gap-8 items-start">
                 <div class="w-full md:w-1/2">
@@ -284,6 +410,12 @@
     <footer class="w-full text-center text-gray-500 text-sm py-6 mt-4">
         &copy; 2026 Pro Utility Hub. All tools run client-side.
     </footer>
+
+
+    <!-- Bottom Leaderboard Ad Slot -->
+    <div class="w-full max-w-7xl mx-auto mt-6 mb-6 p-4 rounded-xl border border-gray-700/50 bg-gray-800/50 backdrop-blur-sm flex justify-center items-center h-24 sm:h-32 shadow-inner">
+        <span class="text-gray-500 text-sm font-medium tracking-widest uppercase">[AdSense Leaderboard / Native Banner Slot]</span>
+    </div>
 
     <script>
         /* =========================================
@@ -311,9 +443,12 @@
         const tabsData = [
             { id: 'focus', name: 'Focus Studio' },
             { id: 'text', name: 'Text Cleaner' },
+            { id: 'ocr', name: 'OCR Scanner' },
+            { id: 'compress', name: 'Image Compressor' },
+            { id: 'password', name: 'Password Gen' },
+            { id: 'json', name: 'JSON Formatter' },
             { id: 'color', name: 'Color Palette' },
             { id: 'mockup', name: 'Screenshot Mockup' },
-            { id: 'bgrem', name: 'Background Remover' },
             { id: 'readtime', name: 'Reading Time' },
             { id: 'aspect', name: 'Aspect Ratio' },
             { id: 'svg', name: 'SVG to CSS' },
@@ -616,80 +751,6 @@
 
 
         /* =========================================
-           5. BACKGROUND REMOVER (Simulation)
-        ========================================= */
-        const bgremUpload = document.getElementById('bgrem-upload');
-        const bgremCanvas = document.getElementById('bgrem-canvas');
-        const bgremCtx = bgremCanvas.getContext('2d');
-        const bgremTol = document.getElementById('bgrem-tolerance');
-        const bgremTolVal = document.getElementById('bgrem-tol-val');
-        const bgremPlaceholder = document.getElementById('bgrem-placeholder');
-        let bgremImgObj = null;
-        let originalImageData = null;
-
-        bgremTol.addEventListener('input', (e) => { bgremTolVal.textContent = e.target.value; });
-
-        bgremUpload.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if(!file) return;
-            const url = URL.createObjectURL(file);
-            bgremImgObj = new Image();
-            bgremImgObj.onload = () => {
-                // Resize for performance if too large
-                let w = bgremImgObj.width, h = bgremImgObj.height;
-                const max = 1000;
-                if(w>max || h>max) {
-                    const ratio = Math.min(max/w, max/h);
-                    w *= ratio; h *= ratio;
-                }
-                bgremCanvas.width = w;
-                bgremCanvas.height = h;
-                bgremCtx.drawImage(bgremImgObj, 0, 0, w, h);
-                originalImageData = bgremCtx.getImageData(0,0,w,h);
-                bgremCanvas.classList.remove('hidden');
-                bgremPlaceholder.classList.add('hidden');
-            };
-            bgremImgObj.src = url;
-        });
-
-        bgremCanvas.addEventListener('click', (e) => {
-            if(!originalImageData) return;
-            const rect = bgremCanvas.getBoundingClientRect();
-            const scaleX = bgremCanvas.width / rect.width;
-            const scaleY = bgremCanvas.height / rect.height;
-            const x = Math.floor((e.clientX - rect.left)*scaleX);
-            const y = Math.floor((e.clientY - rect.top)*scaleY);
-
-            // Restore original before removing to allow picking new color cleanly
-            bgremCtx.putImageData(originalImageData, 0, 0);
-
-            const imgData = bgremCtx.getImageData(0,0,bgremCanvas.width,bgremCanvas.height);
-            const data = imgData.data;
-            const pIndex = (y*bgremCanvas.width + x)*4;
-            const tr = data[pIndex], tg = data[pIndex+1], tb = data[pIndex+2];
-            const tol = parseInt(bgremTol.value);
-
-            for(let i=0; i<data.length; i+=4) {
-                const r=data[i], g=data[i+1], b=data[i+2];
-                const dist = Math.sqrt((r-tr)**2 + (g-tg)**2 + (b-tb)**2);
-                if(dist <= tol) {
-                    data[i+3] = 0; // Transparent
-                }
-            }
-            bgremCtx.putImageData(imgData, 0, 0);
-            showToast("Background color removed!");
-        });
-
-        document.getElementById('btn-dl-bgrem').addEventListener('click', () => {
-            if(!originalImageData) return showToast("Upload an image first!");
-            const link = document.createElement('a');
-            link.download = 'transparent.png';
-            link.href = bgremCanvas.toDataURL('image/png');
-            link.click();
-        });
-
-
-        /* =========================================
            6. READING & SPEAKING TIME
         ========================================= */
         const readInput = document.getElementById('readtime-input');
@@ -850,7 +911,222 @@
         });
 
 
+
         /* =========================================
+           11. OCR SCANNER
+        ========================================= */
+        const ocrUpload = document.getElementById('ocr-upload');
+        const ocrPreview = document.getElementById('ocr-preview-img');
+        const ocrPlaceholder = document.getElementById('ocr-placeholder');
+        const ocrOutput = document.getElementById('ocr-output');
+        const ocrLoading = document.getElementById('ocr-loading');
+        const btnExtract = document.getElementById('btn-extract-ocr');
+        let ocrFile = null;
+
+        ocrUpload.addEventListener('change', (e) => {
+            if(e.target.files && e.target.files[0]) {
+                ocrFile = e.target.files[0];
+                ocrPreview.src = URL.createObjectURL(ocrFile);
+                ocrPreview.classList.remove('hidden');
+                ocrPlaceholder.classList.add('hidden');
+            }
+        });
+
+        btnExtract.addEventListener('click', async () => {
+            if(!ocrFile) return showToast('Please upload an image first');
+            if(typeof Tesseract === 'undefined') return showToast('Tesseract.js not loaded yet. Check internet.');
+
+            ocrLoading.classList.remove('hidden');
+            ocrOutput.value = '';
+
+            try {
+                const result = await Tesseract.recognize(ocrFile, 'eng');
+                ocrOutput.value = result.data.text;
+                showToast('Text extracted successfully!');
+            } catch (err) {
+                console.error(err);
+                ocrOutput.value = 'Error extracting text. See console.';
+            } finally {
+                ocrLoading.classList.add('hidden');
+            }
+        });
+
+        document.getElementById('btn-copy-ocr').addEventListener('click', () => copyToClipboard(ocrOutput.value, 'Text Copied!'));
+
+        /* =========================================
+           12. IMAGE COMPRESSOR
+        ========================================= */
+        const compUpload = document.getElementById('compress-upload');
+        const compQual = document.getElementById('compress-quality');
+        const compQualVal = document.getElementById('compress-quality-val');
+        const compWidth = document.getElementById('compress-width');
+        const compFormat = document.getElementById('compress-format');
+        const btnCompress = document.getElementById('btn-compress');
+
+        const compResult = document.getElementById('compress-result');
+        const compPlaceholder = document.getElementById('compress-placeholder');
+        const compPreview = document.getElementById('compress-preview');
+        const compSizeOld = document.getElementById('compress-size-old');
+        const compSizeNew = document.getElementById('compress-size-new');
+        let compOriginalFile = null;
+        let compBlob = null;
+
+        function formatBytes(bytes, decimals = 2) {
+            if (!+bytes) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+        }
+
+        compQual.addEventListener('input', () => {
+            compQualVal.textContent = Math.round(compQual.value * 100) + '%';
+        });
+
+        compUpload.addEventListener('change', (e) => {
+            if(e.target.files && e.target.files[0]) {
+                compOriginalFile = e.target.files[0];
+                compSizeOld.textContent = formatBytes(compOriginalFile.size);
+            }
+        });
+
+        btnCompress.addEventListener('click', () => {
+            if(!compOriginalFile) return showToast('Upload an image first');
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let w = img.width;
+                let h = img.height;
+
+                const targetW = parseInt(compWidth.value);
+                if(targetW && w > targetW) {
+                    h = Math.round((targetW / w) * h);
+                    w = targetW;
+                }
+
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+
+                const format = compFormat.value;
+                const quality = parseFloat(compQual.value);
+
+                canvas.toBlob((blob) => {
+                    compBlob = blob;
+                    compPreview.src = URL.createObjectURL(blob);
+                    compSizeNew.textContent = formatBytes(blob.size);
+
+                    compResult.classList.remove('hidden');
+                    compPlaceholder.classList.add('hidden');
+                    showToast('Image compressed!');
+                }, format, quality);
+            };
+            img.src = URL.createObjectURL(compOriginalFile);
+        });
+
+        document.getElementById('btn-dl-compress').addEventListener('click', () => {
+            if(!compBlob) return;
+            const link = document.createElement('a');
+            const ext = compFormat.value.split('/')[1];
+            link.download = `compressed.${ext}`;
+            link.href = URL.createObjectURL(compBlob);
+            link.click();
+        });
+
+        /* =========================================
+           13. PASSWORD & HASH GEN
+        ========================================= */
+        const passOutput = document.getElementById('pass-output');
+        const passLen = document.getElementById('pass-length');
+        const passLenVal = document.getElementById('pass-length-val');
+        const chkUpper = document.getElementById('pass-upper');
+        const chkNum = document.getElementById('pass-num');
+        const chkSym = document.getElementById('pass-sym');
+
+        passLen.addEventListener('input', () => { passLenVal.textContent = passLen.value; });
+
+        function generatePassword() {
+            const lowers = "abcdefghijklmnopqrstuvwxyz";
+            const uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const nums = "0123456789";
+            const syms = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+            let chars = lowers;
+            if(chkUpper.checked) chars += uppers;
+            if(chkNum.checked) chars += nums;
+            if(chkSym.checked) chars += syms;
+
+            const arr = new Uint32Array(passLen.value);
+            window.crypto.getRandomValues(arr);
+
+            let pass = '';
+            for(let i=0; i<arr.length; i++) {
+                pass += chars[arr[i] % chars.length];
+            }
+            passOutput.value = pass;
+        }
+
+        document.getElementById('btn-gen-pass').addEventListener('click', generatePassword);
+        document.getElementById('btn-copy-pass').addEventListener('click', () => copyToClipboard(passOutput.value, 'Password Copied!'));
+        generatePassword();
+
+        const hashInput = document.getElementById('hash-input');
+        const hashOutput = document.getElementById('hash-output');
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        hashInput.addEventListener('input', async () => {
+            const text = hashInput.value;
+            if(!text) {
+                hashOutput.value = '';
+                return;
+            }
+            hashOutput.value = await sha256(text);
+        });
+        document.getElementById('btn-copy-hash').addEventListener('click', () => copyToClipboard(hashOutput.value, 'Hash Copied!'));
+
+
+        /* =========================================
+           14. JSON FORMATTER
+        ========================================= */
+        const jsonInput = document.getElementById('json-input');
+        const jsonError = document.getElementById('json-error');
+
+        document.getElementById('btn-json-format').addEventListener('click', () => {
+            jsonError.classList.add('hidden');
+            try {
+                if(!jsonInput.value.trim()) return;
+                const obj = JSON.parse(jsonInput.value);
+                jsonInput.value = JSON.stringify(obj, null, 4);
+            } catch(e) {
+                jsonError.textContent = e.message;
+                jsonError.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('btn-json-minify').addEventListener('click', () => {
+            jsonError.classList.add('hidden');
+            try {
+                if(!jsonInput.value.trim()) return;
+                const obj = JSON.parse(jsonInput.value);
+                jsonInput.value = JSON.stringify(obj);
+            } catch(e) {
+                jsonError.textContent = e.message;
+                jsonError.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('btn-json-copy').addEventListener('click', () => copyToClipboard(jsonInput.value, 'JSON Copied!'));
+
+/* =========================================
            10. QR & BARCODE GEN
         ========================================= */
         const qrInput = document.getElementById('qr-input');
